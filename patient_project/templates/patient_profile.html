@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container" style="width: 100%; ">
+    <div class="container overflow-hidden">
+
+        <form method="POST" action="{{ url_for('update_patient_profile') }}" novalidate>
+            {{  patient_last_visit.hidden_tag() }}
+            <div class="row gy-5"> {# THE WHOLE ROW STARTS HERE #}
+
+                {#================================================== Patient-ID-Form... ============================================================#}
+                <div class="col-12 mt-2">
+                    <div class="p-3 border bg-light">
+                        <h4 class="text-center mb-3 bg-info text-white"> # {{ current_user.file }} </h4>
+
+                        <div class="row"> {# ============== start row inside ============== #}
+                            <div class="col-12 d-flex">
+
+                                <div class="col-4">
+                                    <p>
+                                        {{ patientIdForm.name.label }}
+                                        {{ patientIdForm.name(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.name.errors[0] }}</span>
+                                    </p>
+
+
+                                    <p>
+                                        {{ patientIdForm.father.label }}
+                                        {{ patientIdForm.father(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.father.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.visa.label }}
+                                        {{ patientIdForm.visa(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.visa.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.file.label }}
+                                        {{ patientIdForm.file(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.file.errors[0] }}</span>
+                                    </p>
+
+
+
+
+                                </div>
+
+
+                                <div class="col-4">
+                                    <p>
+                                        {{ patientIdForm.phone.label }}
+                                        {{ patientIdForm.phone(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.phone.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.age.label }}
+                                        {{ patientIdForm.age(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.age.errors[0] }}</span>
+                                    </p>
+                                    <p>
+                                        {{ patientIdForm.gender.label }}
+                                        {{ patientIdForm.gender(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.gender.errors[0] }}</span>
+                                    </p>
+
+
+
+                                </div>
+
+                                <div class="col-2">
+
+                                    <h5>Patient-detail</h5>
+                                    <p>
+                                        <textarea class="p-2" name='content' id="content" rows="5" cols="30">{{ textAreaValue_1 }}</textarea>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div> {# ========= end row inside  =========== #}
+
+                        <p class="form-group text-center">
+                             {{  patient_last_visit.submit(class="btn btn-outline-info sm-auto") }}
+                        </p>
+
+                    </div>
+                </div>
+                {#================================= =================================================================================================#}
+
+
+                {#===============================================Patient-Medical-condition-Form...==================================================#}
+                <div class="col-12 mt-4">
+                    <div class="p-3 border bg-light">
+                        <h4 class="text-center mb-3 bg-info text-white"> Patient-Last-visit... </h4>
+
+                        <div class="row"> {# ============== start row inside ============== #}
+                            <div class="col-12 d-flex">
+
+                                <div class="col-4">
+
+                                    <p>
+                                        {{ patient_last_visit.disease.label }}
+                                        {{ patient_last_visit.disease(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patient_last_visit.disease.errors[0] }}</span>
+                                    </p>
+
+
+                                    <p>
+                                        {{ patient_last_visit.checkedByDr.label }}
+                                        {{ patient_last_visit.checkedByDr(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patient_last_visit.checkedByDr.errors[0] }}</span>
+                                    </p>
+
+
+                                </div>
+
+
+                                <div class="col-4">
+
+                                    <p>
+                                        {{ patient_last_visit.medicine.label }}
+                                        {{ patient_last_visit.medicine(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patient_last_visit.medicine.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patient_last_visit.examinations.label }}
+                                        {{ patient_last_visit.examinations(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patient_last_visit.examinations.errors[0] }}</span>
+                                    </p>
+
+
+
+                                </div>
+
+                                <div class="col-3 mb-5">
+
+                                    <h6>Diagnoses</h6>
+                                      <p style="height: 100px" class="form-floating">
+                                        <textarea class="p-2" name='contentProfile' id="contentProfile" rows="6" cols="30">{{ textAreaValue_2 }}</textarea>
+                                     </p>
+                            </div>
+
+                            </div>
+
+                        </div> {# ========= end row inside  =========== #}
+
+                    </div>
+                </div>
+                {#==================================================================================================================================#}
+
+
+
+
+                <h6 style="margin-left: 45%; margin-top: 2%; color: black;"><strong><ins>Old-Drugs</ins></strong></h6>
+                <table class="table table-bordered border-primary table-sm ">
+                                <thead class="text-white table-hover" style="font-size: 12px; background-color: rgb(128,0,0)">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">usage</th>
+                                        <th scope="col" class="text-center" style="width: 10%;">duration</th>
+                                        <th scope="col" style="width: 7%;">date-given</th>
+                                        <th scope="col">reason-given</th>
+
+                                        <th scope="col" class="text-center"> </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {# ############################################################################################# #}
+
+                                    {% if medicine_box|length > 0 %}
+
+                                         {% for item in medicine_box %}
+
+                                                    <tr style="font-size: 11px;">
+                                                        <th scope="row" class="text-decoration-line-through">{{ loop.index }}</th>
+                                                            {% if item.status == True %}
+                                                                <td style="text-decoration: line-through">{{ item.medicine }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.usage }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.duration }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.dateGiven }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.explainReason }}</td>
+                                                            {% else %}
+                                                                <td>{{ item.medicine }}</td>
+                                                                <td>{{ item.usage }}</td>
+                                                                <td>{{ item.duration }}</td>
+                                                                <td>{{ item.dateGiven }}</td>
+                                                                <td>{{ item.explainReason }}</td>
+                                                            {% endif %}
+
+                                                            <td class="text-center">
+                                                                    <a href="{{ url_for('edit_medicine', id=item.id) }}" class="edit" title="Edit-to-change-the-medicine" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                                    <a href="{{ url_for('delete_medicine', id=item.id) }}" class="delete text-danger" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                                            </td>
+
+                                                        </tr>
+                                            {% endfor %}
+
+                                    {% endif %}
+
+                                {# ############################################################################################# #}
+                                </tbody>
+
+                </table>
+                        {# ############################################################################################# #}
+
+
+
+                <h6 style="margin-left: 45%; color: black;"><strong><ins>Changed-Drugs</ins></strong></h6>
+                <table class="table table-bordered border-primary table-sm">
+                        <thead class="table table-hover text-white" style="font-size: 12px; background-color: rgb(128,0,0)">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col" style="font-weight: bolder; color: red;">Old-Drug</th>
+                                <th scope="col" style="width:8%"></th>
+                                <th scope="col">New-drug</th>
+                                <th scope="col">Usage</th>
+                                <th scope="col" class="text-center" style="width: 10%;">Duration</th>
+                                <th scope="col" style="width: 7%;">Date-Given</th>
+                                <th scope="col">Reason-Given</th>
+                                <th scope="col" class="text-center"> </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% if changed_box|length > 0 %}
+
+                                 {% for item in changed_box %}
+
+                                            <tr style="font-size: 11px;">
+                                                        <th scope="row" class="text-decoration-line-through">{{ loop.index }}</th>
+
+                                                        <td style="text-decoration: line-through; color: red; font-weight: bold;">{{ item.oldMedicine }}</td>
+                                                        <td style="font-weight: bolder; color: blue">changed-></td>
+                                                        <td>{{ item.newMedicine }}</td>
+                                                        <td>{{ item.newUsage }}</td>
+                                                        <td>{{ item.newDuration }}</td>
+                                                        <td>{{ item.newDateGiven }}</td>
+                                                        <td>{{ item.newExplainReason }}</td>
+
+                                                    <td class="text-center">
+                                                            <a href="{{ url_for('edit_medicine', id=item.id) }}" class="edit" title="Edit-to-change-the-medicine" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                            <a href="{{ url_for('delete_medicine', id=item.id) }}" class="delete text-danger" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                                    </td>
+
+
+                                                </tr>
+                                    {% endfor %}
+
+                            {% endif %}
+
+                        </tbody>
+
+                </table>
+                        {#==================================================================================================================================#}
+
+            </div>{# THE WHOLE ROW ENDS HERE #}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+    <h1 class="text-center" style="font-family: monospace;"> Patients follow-up's form</h1>
+    <hr>
+    <h4 class="mt-5">
+        <h4 style="font-family: monospace;">
+            It is compulsory to fill all the forms... .. . !
+        </h4>
+    </h4>
+
+    <div class="text-center mt-5">
+
+        <a href="/patients_ID" class="btn btn-info float-left">New-Patient</a>
+
+        <form method="POST" action="{{ url_for('find_patient')}}">
+            <input name='content' id="content" class="form-control-sm p-3" type="search"
+                placeholder="Search-existed-file" autofocus aria-label="Search">
+            <button class="btn btn-info" type="submit">Search</button>
+        </form>
+    </div>
+
+
+
+    <div>
+        <pre>
+
+
+
+         </pre>
+    </div>
+
+    <h3>Note !</h3>
+    <hr style="width: 70px; float: left; height: 10px;">
+
+    <p>
+        <pre>
+                    The standard chunk of Lorem Ipsum used since the 1500s is
+                    reproduced below for those interested Sections 1.10.32 and
+                    1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are
+                    also reproducedin their exact original form,
+                    accompanied by English versions from the 1914 translation by
+                </pre>
+    </p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <form method="POST" action="{{ url_for('add_medicine', id=id, bool_value=bool_value)}}" novalidate>
+
+        {{  patientVisitForm.hidden_tag() }}
+
+        <fieldset class="form-group mt-3">
+            <h5 class="text-center bg-info text-white"> Patient-Last-Visit-Form... </h5>
+
+
+        <div class="row gy-5"> {# THE WHOLE ROW STARTS HERE #}
+
+                <div class="col-12 mt-2">
+                    <div class="p-3 border bg-light">
+
+                        <div class="row"> {# ROW inside starts here #}
+
+                            <div class="col-4">
+
+                                <p>
+                                    {{ patientVisitForm.medicine.label }}
+                                    {{ patientVisitForm.medicine(class="form-control form-control-sm")}}
+                                    <span style="color:red">{{ patientVisitForm.medicine.errors[0] }}</span>
+                                </p>
+
+                                <p>
+                                    {{ patientVisitForm.usage.label }}
+                                    {{ patientVisitForm.usage(class="form-control form-control-sm")}}
+                                    <span style="color:red">{{ patientVisitForm.usage.errors[0] }}</span>
+                                </p>
+
+                                <p>
+                                    {{ patientVisitForm.duration.label }}
+                                    {{ patientVisitForm.duration(class="form-control form-control-sm")}}
+                                    <span style="color:red">{{ patientVisitForm.duration.errors[0] }}</span>
+                                </p>
+                                <p>
+                                    {{ patientVisitForm.explainReason.label }}
+                                    {{ patientVisitForm.explainReason(class="form-control form-control-sm")}}
+                                    <span style="color:red">{{ patientVisitForm.explainReason.errors[0] }}</span>
+                                </p>
+
+
+
+                                <p class="form-group text-center">
+                                        {{ patientVisitForm.submit(class="btn btn-outline-info m-auto") }}
+                                </p>
+
+                             </div>
+
+
+
+
+
+                            <div class="col-4">
+                                    <p>
+                                        {{ patientVisitForm.dateGiven.label }}
+                                        {{ patientVisitForm.dateGiven(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientVisitForm.dateGiven.errors[0] }}</span>
+                                    </p>
+
+                                     <p>
+                                        {{ patientVisitForm.disease.label }}
+                                        {{ patientVisitForm.disease(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientVisitForm.disease.errors[0] }}</span>
+                                    </p>
+
+
+                                    <p>
+                                        {{ patientVisitForm.checkedByDr.label }}
+                                        {{ patientVisitForm.checkedByDr(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientVisitForm.checkedByDr.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientVisitForm.examinations.label }}
+                                        {{ patientVisitForm.examinations(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientVisitForm.examinations.errors[0] }}</span>
+                                    </p>
+
+                            </div>
+
+
+                            <div class="col-3">
+                                <h5>Hafkana</h5>
+                                <p style="height: 100px" class="form-floating">
+                                    <textarea name='content' id="content" rows="5" cols="30">{{ textArea_1 }}</textarea>
+                                 </p>
+                            </div>
+
+                    </div>{# ROW inside ENDS here #}
+
+                        <h6 class="text-center"><strong><ins>Old-Drugs</ins></strong></h6>
+
+
+                            <table class="table table-bordered border-primary table-sm ">
+                                <thead class="table-dark text-white table-hover" style="font-size: 12px;">
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Usage</th>
+                                        <th scope="col" class="text-center">Duration</th>
+                                        <th scope="col">Date-Given</th>
+                                        <th scope="col">Reason-Given</th>
+
+                                        <th scope="col" class="text-center"> </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {# ############################################################################################# #}
+
+                                    {% if medicine_box|length > 0 %}
+
+                                         {% for item in medicine_box %}
+
+                                                    <tr style="font-size: 11px;">
+                                                        <th scope="row" class="text-decoration-line-through">{{ loop.index }}</th>
+                                                            {% if item.status == True %}
+                                                                <td style="text-decoration: line-through">{{ item.medicine }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.usage }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.duration }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.dateGiven }}</td>
+                                                                <td style="text-decoration: line-through">{{ item.explainReason }}</td>
+                                                            {% else %}
+                                                                <td>{{ item.medicine }}</td>
+                                                                <td>{{ item.usage }}</td>
+                                                                <td>{{ item.duration }}</td>
+                                                                <td>{{ item.dateGiven }}</td>
+                                                                <td>{{ item.explainReason }}</td>
+                                                            {% endif %}
+
+                                                            <td class="text-center">
+                                                                    <a href="{{ url_for('edit_medicine', id=item.id) }}" class="edit" title="Edit-to-change-the-medicine" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                                    <a href="{{ url_for('delete_medicine', id=item.id) }}" class="delete text-danger" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                                            </td>
+
+                                                        </tr>
+                                            {% endfor %}
+
+                                    {% endif %}
+
+                                {# ############################################################################################# #}
+                                </tbody>
+
+                            </table>
+
+
+
+
+
+
+
+
+                                <h6 class="text-center"><strong><ins>Changed-Drugs</ins></strong></h6>
+
+                                  <table class="table table-bordered border-primary table-sm">
+                                        <thead class="table-dark table-hover" style="font-size: 12px;">
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col" style="font-weight: bolder; color: red;">Old-Drug</th>
+                                                <th scope="col" style="width:8%"></th>
+                                                <th scope="col">New-Drug</th>
+                                                <th scope="col">usage</th>
+                                                <th scope="col" class="text-center">Duration</th>
+                                                <th scope="col">Date-Given</th>
+                                                <th scope="col">Reason-Given</th>
+                                                <th scope="col" class="text-center"> </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% if changed_box|length > 0 %}
+
+                                                 {% for item in changed_box %}
+
+                                                            <tr style="font-size: 11px;">
+                                                                        <th scope="row" class="text-decoration-line-through">{{ loop.index }}</th>
+
+                                                                        <td style="text-decoration: line-through; color: red; font-weight: bold;">{{ item.oldMedicine }}</td>
+                                                                        <td style="font-weight: bolder; color: blue">changed-></td>
+                                                                        <td>{{ item.newMedicine }}</td>
+                                                                        <td>{{ item.newUsage }}</td>
+                                                                        <td>{{ item.newDuration }}</td>
+                                                                        <td>{{ item.newDateGiven }}</td>
+                                                                        <td>{{ item.newExplainReason }}</td>
+
+                                                                    <td class="text-center">
+                                                                            <a href="{{ url_for('edit_medicine', id=item.id) }}" class="edit" title="Edit-to-change-the-medicine" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                                            <a href="{{ url_for('delete_medicine', id=item.id) }}" class="delete text-danger" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                    {% endfor %}
+
+                                            {% endif %}
+
+                                        </tbody>
+
+                                    </table>
+
+                    </div>
+                </div>
+
+
+            </div>{# THE WHOLE ROW ENDS HERE #}
+
+
+
+
+        </fieldset>
+    </form>
+
+</div>
+
+{% endblock %}

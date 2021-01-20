@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+  <form method="POST" action="{{ url_for('all_patients') }}" novalidate>
+    <fieldset class="form-group mt-3">
+      <div class="form-group mt-3">
+        <h5 class="text-center bg-info text-white"> Patient-Names </h5>
+
+        <div class="p-3 border bg-light">
+          <table class="table table-bordered">
+            <thead class="table table-hover">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">File № </th>
+                <th scope="col">Phone</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for patient in allPatients %}
+              <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td><a href="{{ url_for('patient_profile', id=patient.id) }}">{{ patient.name }}</a></td>
+                <td>{{ patient.father }}</td>
+                <td>{{ patient.file }}</td>
+                <td>{{ patient.phone }}</td>
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+{% endblock %}

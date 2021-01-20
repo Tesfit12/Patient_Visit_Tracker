@@ -1,0 +1,1 @@
+from patient_project import app, dbfrom itertools import zip_longestimport jinja2env = jinja2.Environment()env.globals.update(zip=zip)if __name__ == '__main__':    # db.create_all()    app.run(host="localhost", port=8000, debug=True)

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <form method="POST" action="{{ url_for('patients_ID') }}" novalidate>
+        {{  patientIdForm.hidden_tag() }}
+        <fieldset class="form-group mt-2">
+            <h5 class="text-center bg-info text-white"> Patient-ID... </h5>
+
+            {#================================================== Patient-ID-Form... ============================================================#}
+
+            <div class="row gy-5"> {# THE WHOLE ROW STARTS HERE #}
+
+                <div class="col-12 mt-2">
+                    <div class="p-3 border bg-light">
+
+                        <div class="row"> {# ============== start row inside ============== #}
+                            <div class="col-12 d-flex">
+
+                                <div class="col-6">
+                                    <p>
+                                        {{ patientIdForm.name.label }}
+                                        {{ patientIdForm.name(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.name.errors[0] }}</span>
+                                    </p>
+
+
+                                    <p>
+                                        {{ patientIdForm.father.label }}
+                                        {{ patientIdForm.father(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.father.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.visa.label }}
+                                        {{ patientIdForm.visa(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.visa.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.file.label }}
+                                        {{ patientIdForm.file(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.file.errors[0] }}</span>
+                                    </p>
+
+
+                                </div>
+
+
+                                <div class="col-5">
+
+                                    <p>
+                                        {{ patientIdForm.phone.label }}
+                                        {{ patientIdForm.phone(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.phone.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.age.label }}
+                                        {{ patientIdForm.age(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.age.errors[0] }}</span>
+                                    </p>
+                                    <p>
+                                        {{ patientIdForm.gender.label }}
+                                        {{ patientIdForm.gender(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.gender.errors[0] }}</span>
+                                    </p>
+
+                                    <p>
+                                        {{ patientIdForm.patient_detail.label }}
+                                        {{ patientIdForm.patient_detail(class="form-control form-control-sm")}}
+                                        <span style="color:red">{{ patientIdForm.patient_detail.errors[0] }}</span>
+                                    </p>
+
+
+                                </div>
+
+                            </div>
+
+                        </div> {# ========= end row inside  =========== #}
+                        <p class="form-group text-center">
+                            {{  patientIdForm.submit(class="btn btn-outline-info m-auto") }}
+                        </p>
+
+                    </div>
+                </div>
+
+
+            </div>{# THE WHOLE ROW ENDS HERE #}
+
+
+
+
+        </fieldset>
+    </form>
+</div>
+
+{% endblock %}
